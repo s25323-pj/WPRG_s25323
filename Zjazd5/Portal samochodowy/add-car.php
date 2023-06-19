@@ -53,9 +53,8 @@
 </html>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Połączenie z bazą danych
     $host = 'localhost';
-    $port = 3307; // Twój numer portu
+    $port = 3307;
     $dbname = 'mojaBaza';
     $username = 'root';
 
@@ -63,14 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Pobranie danych z formularza
         $marka = $_POST['marka'];
         $model = $_POST['model'];
         $cena = $_POST['cena'];
         $rok = $_POST['rok'];
         $opis = $_POST['opis'];
 
-        // Wstawienie danych do bazy
         $sql = "INSERT INTO samochody (marka, model, cena, rok, opis) VALUES (:marka, :model, :cena, :rok, :opis)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':marka', $marka);
